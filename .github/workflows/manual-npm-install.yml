@@ -26,6 +26,3 @@ jobs:
           
       - name: Install Dependencies
         run: npm install
-
-      - name: Run bidara
-        run: npm run dev
