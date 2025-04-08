@@ -27,6 +27,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Debug Secrets Context
+        run: |
+          echo "Available secrets context:"
+          echo "${{ toJSON(secrets) }}"
+
       - name: Run bidara
         run: npm run dev
         env:
