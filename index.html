@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="bidara.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="bidara.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIDARA: Bio-Inspired Design and Research Assistant</title>
+    <meta name="description" content="BIDARA is a GPT-4 chatbot that was instructed to help scientists and engineers understand, learn from, and emulate the strategies used by living things to create sustainable designs and technologies using the Biomimicry Institute's step-by-step design process." />
+
+    <!-- PWA tags -->
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimal-ui">
+
+    <!-- PWA tags for Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-title" content="BIDARA">
+    <link rel="icon" type="image/png" href="bidara.png">
+
+    <!-- PWA tags for iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BIDARA">
+    <meta name="apple-touch-startup-image" content="bidara.png">
+    <link rel="apple-touch-icon" href="bidara.png">
+
+    <link href="https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="build/bundle.css" />
+    <script defer src='build/bundle.js'></script>
+  </head>
+  <body>
+    <script>
+      let colorTheme = "light";
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        colorTheme = event.matches ? "dark" : "light";
+        setCssVars(colorTheme);
+      });
+
+      const root = document.documentElement;
+
+      function setCssVars(colorTheme) {
+        const attributesToChange = [
+          "chat-background-color",
+          "border-color",
+          "nav-color",
+          "nav-off-color",
+          "translucent-nav-color",
+          "text-primary-color",
+          "text-secondary-color",
+          "ai-message-background-color",
+          "user-message-background-color",
+        ]
+
+        if (colorTheme === "light") {
+          attributesToChange.forEach(attr => {
+            const attrToChange = "--" + attr;
+            const colorChange = `var(--light-${attr})`;
+            root.style.setProperty(attrToChange, colorChange);
+          });
+
+        } else if (colorTheme === "dark") {
+          attributesToChange.forEach(attr => {
+            const attrToChange = "--" + attr;
+            const colorChange = `var(--dark-${attr})`;
+            root.style.setProperty(attrToChange, colorChange);
+          });
+        }
+      }
+
+      setCssVars(colorTheme);
+    </script>
+  </body>
+</html>
