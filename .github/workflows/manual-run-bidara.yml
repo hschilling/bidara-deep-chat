@@ -36,4 +36,3 @@ jobs:
         run: npm run dev
         env:
             OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-  
