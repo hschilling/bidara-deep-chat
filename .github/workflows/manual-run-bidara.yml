@@ -12,7 +12,7 @@ on:
 
 jobs:
   run-bidara:
-    name: Run npm install
+    name: Manual Run bidara
     runs-on: ubuntu-latest
     
     steps:
