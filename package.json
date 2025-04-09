@@ -24,10 +24,11 @@
   },
   "scripts": {
     "build": "export ENV=\"prod\" || set ENV=\"prod\"; rollup -c --bundleConfigAsCjs",
-    "dev": "export ENV=\"dev\" || set ENV=\"dev\"; [ -z \"${SS_KEY}\"  ] && echo \"WARN: SS_KEY not set. Defaulting to ''\" && export SS_KEY=\"\" || set SS_KEY=\"\"; [ -z \"${PQAI_KEY}\"  ] && echo \"WARN: PQAI_KEY not set. Defaulting to ''\" && export PQAI_KEY=\"\" || set PQAI_KEY=\"\"; [ -z \"${TAV_KEY}\" ] && echo \"WARN: TAV_KEY not set. Defaulting to ''\" && export TAV_KEY=\"\" || set TAV_KEY=\"\"; rollup -c -w --bundleConfigAsCjs",
+    "dev:bundle": "export ENV=\"dev\" || set ENV=\"dev\"; [ -z \"${SS_KEY}\"  ] && echo \"WARN: SS_KEY not set. Defaulting to ''\" && export SS_KEY=\"\" || set SS_KEY=\"\"; [ -z \"${PQAI_KEY}\"  ] && echo \"WARN: PQAI_KEY not set. Defaulting to ''\" && export PQAI_KEY=\"\" || set PQAI_KEY=\"\"; [ -z \"${TAV_KEY}\" ] && echo \"WARN: TAV_KEY not set. Defaulting to ''\" && export TAV_KEY=\"\" || set TAV_KEY=\"\"; rollup -c -w --bundleConfigAsCjs",
+    "dev:server": "sirv public --host 0.0.0.0 --port 8080 --dev",
     "start": "sirv public",
-    "test:invalid": "playwright test" 
-  },
+    "test:invalid": "playwright test"
+    },  
   "keywords": [],
   "description": ""
 }

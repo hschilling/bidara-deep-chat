@@ -32,10 +32,24 @@ jobs:
           npm install --save-dev @playwright/test
           npx playwright install --with-deps
 
-
-      - name: Start Web App (in background)
-        run: npm run dev & sleep 30
-        # Adjust the sleep time as needed to ensure your app is running
+      - name: Start Web App (Development Server)
+        run: npm run dev:server & echo "Development server started in the background"
+  
+      - name: Wait for Web App to Start
+        run: |
+          MAX_RETRIES=10
+          RETRY_INTERVAL=5
+          RETRIES=0
+          until curl -sSf http://localhost:8080/; do # Removed /health for now, adjust if needed
+            if [ "$RETRIES" -ge "$MAX_RETRIES" ]; then
+              echo "Error: Web app failed to start after $MAX_RETRIES retries."
+              exit 1
+            fi
+            echo "Waiting for web app to start (attempt $RETRIES)..."
+            sleep $RETRY_INTERVAL
+            RETRIES=$((RETRIES + 1))
+          done
+          echo "Web app is ready!"
 
       - name: Run End-to-End Tests
         run: npm run test:invalid
