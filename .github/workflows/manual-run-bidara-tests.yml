@@ -1,0 +1,41 @@
+name: Manual Run bidara
+
+# This sets up manual triggering through the GitHub Actions UI
+on:
+  workflow_dispatch:
+    # You can add input parameters here if needed later
+    # inputs:
+    #   example_input:
+    #     description: 'Example input parameter'
+    #     required: false
+    #     default: 'default value'
+
+jobs:
+  run-bidara:
+    name: Manual Run bidara
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+
+      - name: Start Web App (in background)
+        run: npm run dev & sleep 10
+        # Adjust the sleep time as needed to ensure your app is running
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run End-to-End Tests
+        run: npm run test:invalid
+        env:
+          OPENAI_API_KEY: gleep
