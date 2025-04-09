@@ -27,13 +27,15 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Playwright
+        run: |
+          npm install --save-dev @playwright/test
+          npx playwright install --with-deps
+
 
       - name: Start Web App (in background)
         run: npm run dev & sleep 10
         # Adjust the sleep time as needed to ensure your app is running
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
 
       - name: Run End-to-End Tests
         run: npm run test:invalid
