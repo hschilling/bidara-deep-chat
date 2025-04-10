@@ -34,7 +34,10 @@ jobs:
 
       - name: Start Web App (Development Server)
         run: npm run dev:server & echo "Development server started in the background"
-  
+
+      - name: Log Environment Variables
+        run: env
+
       - name: Wait for Web App to Start
         run: |
           MAX_RETRIES=10
@@ -55,3 +58,13 @@ jobs:
         run: npm run test:invalid
         env:
           OPENAI_API_KEY: gleep
+
+      - name: Take Screenshot
+        run: npx playwright test --reporter=line,json --output=test-results/
+        
+      - name: Upload Screenshots as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: ./screenshots/*.png # Adjust the path to where your screenshots are saved
+          retention-days: 1 # How long to keep the artifacts          
