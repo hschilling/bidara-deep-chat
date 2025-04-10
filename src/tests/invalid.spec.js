@@ -6,6 +6,7 @@ test('invalid OPENAI_API_KEY', async ({ page }) => {
   await page.goto('http://localhost:8080/');
 
   // 2. Locate the contenteditable input using its ID and wait for it to be visible
+  await page.waitForLoadState('networkidle'); // Or 'domcontentloaded' or 'load'
   const textInput = page.locator('#insert-key-input');
   await page.screenshot({ path: 'screenshot-before-wait.png' });
   await textInput.waitFor({ state: 'visible', timeout: 60000 });
