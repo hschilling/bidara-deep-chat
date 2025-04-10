@@ -2,7 +2,8 @@ const { test, expect } = require('@playwright/test');
 
 test('invalid OPENAI_API_KEY', async ({ page }) => {
   // 1. Launch the browser and navigate to your app's URL
-  await page.goto('http://localhost:8080');
+//   await page.goto('http://localhost:8080');
+  await page.goto('http://127.0.0.1:8080');
 
   // 2. Locate the contenteditable input using its ID and wait for it to be visible
   const textInput = page.locator('#insert-key-input');
