@@ -54,8 +54,23 @@ jobs:
           done
           echo "Web app is ready!"
 
+
+
+      # - name: Set up Virtual Display
+      #   run: |
+      #       sudo apt-get update
+      #       sudo apt-get install -y xvfb
+      #       Xvfb :99 -screen 0 1280x1024x24 &
+      #       export DISPLAY=:99
+        
+      # - name: Run End-to-End Tests (Headed - Debugging)
+      #   run: npx playwright test --headed
+      #   env:
+      #       OPENAI_API_KEY: gleep
+      #       DISPLAY: :99 # Ensure DISPLAY is set
+
       - name: Run End-to-End Tests
-        run: npm run test:invalid
+        run: npx playwright test:invalid
         env:
           OPENAI_API_KEY: gleep
         continue-on-error: true # Allow the workflow to continue even if tests fail
