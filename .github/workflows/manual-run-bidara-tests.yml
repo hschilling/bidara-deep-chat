@@ -70,7 +70,7 @@ jobs:
       #       DISPLAY: :99 # Ensure DISPLAY is set
 
       - name: Run End-to-End Tests
-        run: npx playwright test:invalid
+        run: npx playwright test
         env:
           OPENAI_API_KEY: gleep
         continue-on-error: true # Allow the workflow to continue even if tests fail
