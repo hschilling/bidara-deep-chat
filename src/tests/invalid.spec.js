@@ -14,7 +14,15 @@ test('invalid OPENAI_API_KEY', async ({ page }) => {
   // 4. Type text into the input
   await page.keyboard.type('invalid OPENAI_API_KEY');
 
-  // 5. Assert that the correct error text is present
+
+  // 5. Locate the start button using its ID
+  const startButton = page.locator('#start-button');
+  await startButton.waitFor({ state: 'visible' }); // Wait for the button to be visible
+
+  // 6. Click the start button
+  await startButton.click();
+
+  // 7. Assert that the correct error text is present
   const errorDiv = page.locator('#insert-key-input-invalid-text');
   await errorDiv.waitFor({ state: 'visible' }); // Wait for the error message
   const textContent = await errorDiv.textContent();
