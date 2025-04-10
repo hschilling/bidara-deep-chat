@@ -2,6 +2,7 @@
   "name": "bidara-deep-chat-svelte",
   "version": "1.0.0",
   "devDependencies": {
+    "@playwright/test": "^1.51.1",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -28,7 +29,7 @@
     "dev:server": "sirv public --host 0.0.0.0 --port 8080 --dev",
     "start": "sirv public",
     "test:invalid": "playwright test"
-    },  
+  },
   "keywords": [],
   "description": ""
 }
