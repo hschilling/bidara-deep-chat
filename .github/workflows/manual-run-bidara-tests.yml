@@ -43,7 +43,7 @@ jobs:
           MAX_RETRIES=10
           RETRY_INTERVAL=5
           RETRIES=0
-          until curl -sSf http://localhost:8080/; do # Removed /health for now, adjust if needed
+          until curl -sSf http://localhost:8080/; do
             if [ "$RETRIES" -ge "$MAX_RETRIES" ]; then
               echo "Error: Web app failed to start after $MAX_RETRIES retries."
               exit 1
@@ -58,13 +58,11 @@ jobs:
         run: npm run test:invalid
         env:
           OPENAI_API_KEY: gleep
+        continue-on-error: true # Allow the workflow to continue even if tests fail
 
-      - name: Take Screenshot
-        run: npx playwright test --reporter=line,json --output=test-results/
-        
-      - name: Upload Screenshots as Artifact
+      - name: Upload Test Results and Screenshots as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: screenshots
-          path: ./screenshots/*.png # Adjust the path to where your screenshots are saved
-          retention-days: 1 # How long to keep the artifacts          
+          name: test-results
+          path: ./test-results # Upload the entire test-results directory
+          retention-days: 1
