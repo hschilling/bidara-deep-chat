@@ -2,14 +2,18 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
-  // ... other configurations
-  reporter: [
-    ['list'],
-    ['json', { outputFile: 'test-results.json' }],
-    ['html', { open: 'never' }],
-  ],
   use: {
-    // ... other use options
-    screenshot: 'only-on-failure', // Take screenshots only when tests fail
+    launchOptions: {
+      args: [
+        '--no-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--no-first-run',
+        '--no-zygote',
+        '--single-process', // Sometimes helpful in CI
+      ],
+    },
+    screenshot: 'only-on-failure',
   },
+  // ... other config
 });
